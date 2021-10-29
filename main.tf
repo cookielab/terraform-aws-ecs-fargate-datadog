@@ -24,8 +24,8 @@ resource "aws_ecs_task_definition" "datadog_agent" {
 
   requires_compatibilities = ["FARGATE"]
 
-  cpu          = 10
-  memory       = 256
+  cpu          = 256
+  memory       = 512
   network_mode = "awsvpc"
 }
 
