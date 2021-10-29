@@ -22,7 +22,7 @@ resource "aws_ecs_task_definition" "datadog_agent" {
     }
   ])
 
-  requires_compatibilities = "FARGATE"
+  requires_compatibilities = ["FARGATE"]
 
   cpu          = 10
   memory       = 256
