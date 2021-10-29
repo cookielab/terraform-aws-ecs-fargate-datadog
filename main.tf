@@ -3,7 +3,8 @@ data "aws_ecs_cluster" "cluster" {
 }
 
 resource "aws_ecs_task_definition" "datadog_agent" {
-  family = "datadog-agent"
+  family        = "datadog-agent"
+  task_role_arn = aws_iam_role.datadog_agent.arn
   container_definitions = jsonencode([
     {
       "name" : "datadog-agent",
@@ -27,6 +28,8 @@ resource "aws_ecs_task_definition" "datadog_agent" {
   cpu          = 256
   memory       = 512
   network_mode = "awsvpc"
+
+  depends_on = [aws_iam_role_policy.datadog_agent]
 }
 
 resource "aws_ecs_service" "datadog_agent" {
@@ -34,8 +37,6 @@ resource "aws_ecs_service" "datadog_agent" {
   cluster         = data.aws_ecs_cluster.cluster.id
   task_definition = aws_ecs_task_definition.datadog_agent.arn
   desired_count   = 1
-  iam_role        = aws_iam_role.datadog_agent.arn
-  depends_on      = [aws_iam_role_policy.datadog_agent]
 
   network_configuration {
     subnets          = var.subnets
