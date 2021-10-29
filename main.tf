@@ -37,7 +37,7 @@ resource "aws_ecs_service" "datadog_agent" {
   iam_role        = aws_iam_role.datadog_agent.arn
   depends_on      = [aws_iam_role_policy.datadog_agent]
 
-  network_configuration = {
+  network_configuration {
     subnets          = var.subnets
     security_groups  = var.security_groups
     assign_public_ip = false
