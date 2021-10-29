@@ -38,6 +38,8 @@ resource "aws_ecs_service" "datadog_agent" {
   task_definition = aws_ecs_task_definition.datadog_agent.arn
   desired_count   = 1
 
+  launch_type = "FARGATE"
+
   network_configuration {
     subnets          = var.subnets
     security_groups  = var.security_groups
