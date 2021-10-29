@@ -103,6 +103,6 @@ resource "aws_iam_role_policy" "datadog_agent" {
 }
 
 resource "aws_cloudwatch_log_group" "datadog_agent" {
-  name              = var.var.log_group
+  name              = var.log_group
   retention_in_days = 1
 }
