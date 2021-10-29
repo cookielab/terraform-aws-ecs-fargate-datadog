@@ -2,12 +2,18 @@ data "aws_ecs_cluster" "cluster" {
   cluster_name = var.cluster_name
 }
 
+locals {
+
+}
+
 resource "aws_ecs_task_definition" "datadog_agent" {
   family        = "datadog-agent"
   task_role_arn = aws_iam_role.datadog_agent.arn
   container_definitions = jsonencode([
     {
       "name" : "datadog-agent",
+      "cpu" : 10,
+      "memory" : 256,
       "image" : "public.ecr.aws/datadog/agent:latest",
       "essential" : true,
       "environment" : [
@@ -19,7 +25,15 @@ resource "aws_ecs_task_definition" "datadog_agent" {
           "name" : "ECS_FARGATE",
           "value" : "true"
         }
-      ]
+      ],
+      "logConfiguration" : {
+        "logDriver" : "awslogs",
+        "options" : {
+          "awslogs-group" : "${var.log_group}",
+          "awslogs-region" : "${var.aws_region}",
+          "awslogs-stream-prefix" : "${var.log_stream_prefix}"
+        }
+      }
     }
   ])
 
@@ -77,6 +91,8 @@ resource "aws_iam_role_policy" "datadog_agent" {
           "ecs:ListClusters",
           "ecs:ListContainerInstances",
           "ecs:DescribeContainerInstances",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents",
         ]
         Effect   = "Allow"
         Resource = "*"
