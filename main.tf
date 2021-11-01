@@ -23,6 +23,10 @@ resource "aws_ecs_task_definition" "datadog_agent" {
           "value" : "${var.datadog_api_key}"
         },
         {
+          "name" : "DD_SITE",
+          "value" : "${var.datadog_site}"
+        },
+        {
           "name" : "ECS_FARGATE",
           "value" : "true"
         }
