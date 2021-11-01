@@ -44,5 +44,5 @@ variable "retention_in_days" {
 
 variable "datadog_site" {
   type    = string
-  default = "datadoghq.eu"
+  default = "datadoghq.com"
 }
