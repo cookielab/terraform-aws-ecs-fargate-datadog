@@ -26,3 +26,18 @@ variable "log_stream_prefix" {
 variable "aws_region" {
   type = string
 }
+
+variable "role_name" {
+  type    = string
+  default = "CustomDatadogRole"
+}
+
+variable "policy_name" {
+  type    = string
+  default = "CustomDatadogRolePolicy"
+}
+
+variable "retention_in_days" {
+  type    = number
+  default = 1
+}

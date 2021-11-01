@@ -63,7 +63,7 @@ resource "aws_ecs_service" "datadog_agent" {
 }
 
 resource "aws_iam_role" "datadog_agent" {
-  name = "CustomDatadogRole"
+  name = var.role_name
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -81,7 +81,7 @@ resource "aws_iam_role" "datadog_agent" {
 }
 
 resource "aws_iam_role_policy" "datadog_agent" {
-  name = "CustomDatadogRolePolicy"
+  name = var.policy_name
   role = aws_iam_role.datadog_agent.id
 
   policy = jsonencode({
@@ -104,5 +104,5 @@ resource "aws_iam_role_policy" "datadog_agent" {
 
 resource "aws_cloudwatch_log_group" "datadog_agent" {
   name              = var.log_group
-  retention_in_days = 1
+  retention_in_days = var.retention_in_days
 }
