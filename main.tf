@@ -7,7 +7,7 @@ locals {
 }
 
 resource "aws_ecs_task_definition" "datadog_agent" {
-  family             = "datadog-agent"
+  family             = "${var.task_name}"
   task_role_arn      = aws_iam_role.datadog_agent.arn
   execution_role_arn = aws_iam_role.datadog_agent.arn
   container_definitions = jsonencode([
