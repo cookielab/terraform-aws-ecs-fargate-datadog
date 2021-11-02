@@ -46,6 +46,7 @@ No modules.
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | n/a | `string` | `"CustomDatadogRole"` | no |
 | <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | n/a | `any` | n/a | yes |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | n/a | `any` | n/a | yes |
+| <a name="input_task_name"></a> [task\_name](#input\_task\_name) | n/a | `string` | `"datadog-agent"` | no |
 
 ## Outputs
 
