@@ -12,7 +12,7 @@ resource "aws_ecs_task_definition" "datadog_agent" {
   execution_role_arn = aws_iam_role.datadog_agent.arn
   container_definitions = jsonencode([
     {
-      "name" : "datadog-agent",
+      "name" : "${var.task_name}",
       "cpu" : 10,
       "memory" : 256,
       "image" : "public.ecr.aws/datadog/agent:latest",

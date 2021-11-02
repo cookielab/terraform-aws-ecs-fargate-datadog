@@ -37,6 +37,11 @@ variable "policy_name" {
   default = "CustomDatadogRolePolicy"
 }
 
+variable "task_name" {
+  type    = string
+  default = "datadog-agent"
+}
+
 variable "retention_in_days" {
   type    = number
   default = 1
